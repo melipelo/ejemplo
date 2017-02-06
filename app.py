@@ -31,26 +31,17 @@ def makeWebhookResult(req):
     result = req.get("result")
     parameters = result.get("parameters")
     if req.get("result").get("action") == "productos.sura":
-    
     cliente = parameters.get("tipo_cliente")
-
     #cost = {'Europe':100, 'North America':200, 'South America':300, 'Asia':400, 'Africa':500}
-
     speech = "Buscando productos para " + cliente
-
-    print("Response:")
-    print(speech)
     
-    elif (req.get("result").get("action") == "producto.info"):
-    
+    elif req.get("result").get("action") == "producto.info":
     producto = parameters.get("producto")
-    
     speech = "Buscando información del producto " + producto
     
     else:
     speech =""
-    
-    
+
     return {
         "speech": speech,
         "displayText": speech,
