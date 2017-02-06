@@ -37,7 +37,7 @@ def makeWebhookResult(req):
     
     elif req.get("result").get("action") == "producto.info":
         producto = parameters.get("producto")
-        speech = "Buscando información del producto " + producto
+        speech = "Buscando informacion del producto " + producto
     
     else:
         speech =" "
