@@ -40,7 +40,7 @@ def makeWebhookResult(req):
 
         	if(myResponse.ok):
 			jData = json.loads(myResponse.text)
-		speech =""
+		speech ="Seguros Sura Colombia ofrece los siguientes planes de salud:"
         	for plan in jData:
 	        	speech = speech + "\n" + plan["nombreField"].title()
 	else:
