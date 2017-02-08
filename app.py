@@ -14,61 +14,48 @@ app = Flask(__name__)
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
-    req = request.get_json(silent=True, force=True)
-    url = "https://api.segurossura.com.co/public/v1/directory/products"
-    myResponse = requests.get(url)
-
-    if(myResponse.ok):
-        jData = json.dumps(myResponse.content)
-        print (jData)
-        
-    #print("Request:")
-    #print(json.dumps(req, indent=4))
-
-    res = makeWebhookResult(req)
-
-    res = json.dumps(res, indent=4)
-    print(res)
-    r = make_response(res)
-    r.headers['Content-Type'] = 'application/json'
-    return r
+	req = request.get_json(silent=True, force=True)
+	res = makeWebhookResult(req)
+    	res = json.dumps(res, indent=4)
+    	print(res)
+    	r = make_response(res)
+    	r.headers['Content-Type'] = 'application/json'
+    	return r
 
 def makeWebhookResult(req):
-    result = req.get("result")
-    parameters = result.get("parameters")
-    if req.get("result").get("action") == "productos.sura":
-        cliente = parameters.get("tipo_cliente")
-        speech = "Buscando productos para " + cliente
-    
-    elif req.get("result").get("action") == "producto.info":
-        producto = parameters.get("producto")
-        speech = "Buscando informacion del producto " + producto
+	result = req.get("result")
+	parameters = result.get("parameters")
+	if req.get("result").get("action") == "productos.sura":
+        	cliente = parameters.get("tipo_cliente")
+        	speech = "Buscando productos para " + cliente
+	elif req.get("result").get("action") == "producto.info":
+        	producto = parameters.get("producto")
+        	speech = "Buscando informacion del producto " + producto
         
-    elif req.get("result").get("action") == "planes.salud":
-        url = "https://api.segurossura.com.co/public/v1/directory/products"
-        myResponse = requests.get(url)
+    	elif req.get("result").get("action") == "planes.salud":
+        	url = "https://api.segurossura.com.co/public/v1/directory/products"
+        	myResponse = requests.get(url)
 
-        if(myResponse.ok):
-            jData = json.loads(myResponse.text)
+        	if(myResponse.ok):
+			jData = json.loads(myResponse.text)
 		speech =""
-        for plan in jData:
-	        speech += plan["nombreField"]
-              
-    else:
-        speech =" "
+        	for plan in jData:
+	        	speech += plan["nombreField"]
+	else:
+        	speech =" "
 
-    return {
-        "speech": speech,
-        "displayText": speech,
-        #"data": {},
-        # "contextOut": [],
-        "source": "apiai-onlinestore-shipping"
-    }
+	return {
+        	"speech": speech,
+        	"displayText": speech,
+        	#"data": {},
+        	# "contextOut": [],
+        	"source": "apiai-onlinestore-shipping"
+    	}
 
 
 if __name__ == '__main__':
-    port = int(os.getenv('PORT', 5000))
+	port = int(os.getenv('PORT', 5000))
 
-    print "Starting app on port %d" % port
+    	print "Starting app on port %d" % port
 
-    app.run(debug=True, port=port, host='0.0.0.0')
+    	app.run(debug=True, port=port, host='0.0.0.0')
