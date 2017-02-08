@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 # coding=utf-8
-
+import requests
 import urllib
 import json
 import os
-
 from flask import Flask
 from flask import request
 from flask import make_response
@@ -16,9 +15,15 @@ app = Flask(__name__)
 @app.route('/webhook', methods=['POST'])
 def webhook():
     req = request.get_json(silent=True, force=True)
+    url = "https://api.segurossura.com.co/public/v1/directory/products"
+    myResponse = requests.get(url)
 
-    print("Request:")
-    print(json.dumps(req, indent=4))
+    if(myResponse.ok):
+        jData = json.dumps(myResponse.content)
+        print (jData)
+        
+    #print("Request:")
+    #print(json.dumps(req, indent=4))
 
     res = makeWebhookResult(req)
 
