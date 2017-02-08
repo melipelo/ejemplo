@@ -42,7 +42,7 @@ def makeWebhookResult(req):
 			jData = json.loads(myResponse.text)
 		speech =""
         	for plan in jData:
-	        	speech = speech + "\n" + plan["nombreField"]
+	        	speech = speech + "\n" + plan["nombreField"].title()
 	else:
         	speech =" "
 
