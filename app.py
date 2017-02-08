@@ -43,7 +43,17 @@ def makeWebhookResult(req):
     elif req.get("result").get("action") == "producto.info":
         producto = parameters.get("producto")
         speech = "Buscando informacion del producto " + producto
-    
+        
+    elif req.get("result").get("action") == "planes.salud":
+        url = "https://api.segurossura.com.co/public/v1/directory/products"
+        myResponse = requests.get(url)
+
+        if(myResponse.ok):
+            jData = json.loads(myResponse.text)
+		speech =""
+        for plan in jData:
+	        speech += plan["nombreField"]
+              
     else:
         speech =" "
 
