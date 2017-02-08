@@ -25,9 +25,11 @@ def webhook():
 def makeWebhookResult(req):
 	result = req.get("result")
 	parameters = result.get("parameters")
+	
 	if req.get("result").get("action") == "productos.sura":
         	cliente = parameters.get("tipo_cliente")
         	speech = "Buscando productos para " + cliente
+		
 	elif req.get("result").get("action") == "producto.info":
         	producto = parameters.get("producto")
         	speech = "Buscando informacion del producto " + producto
@@ -40,7 +42,7 @@ def makeWebhookResult(req):
 			jData = json.loads(myResponse.text)
 		speech =""
         	for plan in jData:
-	        	speech += plan["nombreField"]
+	        	speech = speech + "\n" + plan["nombreField"]
 	else:
         	speech =" "
 
