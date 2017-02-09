@@ -47,7 +47,7 @@ def makeWebhookResult(req):
 	       		speech = speech + "\n" + plan["nombreField"].title()
 			
 	elif req.get("result").get("action") == "info.especialistas":
-		plan-salud = parameters.get("producto")
+		plan-salud = parameters.get("plan-salud")
 		cuidad = parameters.get("ciudad")
 		especialidad = parameters.get("especialidad")
 		
