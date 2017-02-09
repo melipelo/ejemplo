@@ -47,11 +47,11 @@ def makeWebhookResult(req):
 	       		speech = speech + "\n" + plan["nombreField"].title()
 			
 	elif req.get("result").get("action") == "info.especialistas":
-		producto = parameters.get("producto")
+		plan-salud = parameters.get("producto")
 		cuidad = parameters.get("ciudad")
 		especialidad = parameters.get("especialidad")
 		
-		url = url = "http://lab.sura.com/api/directories/v3.1/health/network/medical/" + producto + "/" + ciudad + "/" + especialidad 
+		url = url = "http://lab.sura.com/api/directories/v3.1/health/network/medical/" + plan-salud + "/" + ciudad + "/" + especialidad 
 		myResponse = requests.get(url)
 
 		if(myResponse.ok):
