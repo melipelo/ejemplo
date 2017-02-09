@@ -60,7 +60,7 @@ def makeWebhookResult(req):
 		speech = "Los profesionales que coinciden con tu busqueda son: \n"
 
 		for medico in jData["network"]:
-	       		speech = speech + "\n" + medico["name"].title() + "\n Dirección: " + medico["address"].title() + "\n Teléfono: " + medico["phone"] + "\n"
+	       		speech = speech + "\n" + medico["name"].title() + "\n Direccion: " + medico["address"].title() + "\n Telefono: " + medico["phone"] + "\n"
 			
 		
 	else:
