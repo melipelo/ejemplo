@@ -27,37 +27,55 @@ def makeWebhookResult(req):
 	parameters = result.get("parameters")
 	
 	if req.get("result").get("action") == "productos.sura":
-        	cliente = parameters.get("tipo_cliente")
-        	speech = "Buscando productos para " + cliente
+        cliente = parameters.get("tipo_cliente")
+        speech = "Buscando productos para " + cliente
 		
 	elif req.get("result").get("action") == "producto.info":
-        	producto = parameters.get("producto")
-        	speech = "Buscando informacion del producto " + producto
+        producto = parameters.get("producto")
+        speech = "Buscando informacion del producto " + producto
         
-    	elif req.get("result").get("action") == "planes.salud":
-        	url = "https://api.segurossura.com.co/public/v1/directory/products"
-        	myResponse = requests.get(url)
+    elif req.get("result").get("action") == "planes.salud":
+        url = "https://api.segurossura.com.co/public/v1/directory/products"
+        myResponse = requests.get(url)
 
-        	if(myResponse.ok):
+        if(myResponse.ok):
 			jData = json.loads(myResponse.text)
+			
 		speech = "Seguros Sura Colombia ofrece los siguientes planes de salud: \n"
-        	for plan in jData:
-	        	speech = speech + "\n" + plan["nombreField"].title()
+		
+        for plan in jData:
+	       	speech = speech + "\n" + plan["nombreField"].title()
+			
+	elif req.get("result").get("action") == "info.especialistas":
+		producto = parameters.get("producto")
+		cuidad = parameters.get("ciudad")
+		especialidad = parameters.get("especialidad")
+		
+		url = url = "http://lab.sura.com/api/directories/v3.1/health/network/medical/" + producto + "/" + ciudad + "/" + especialidad 
+		myResponse = requests.get(url)
+
+		if(myResponse.ok):
+			jData = json.loads(myResponse.text)
+		
+		speech = "Los profesionales que coinciden con tu busqueda son: \n"
+
+		for medico in jData["network"]:
+	       	speech = speech + "\n" + medico["name"].title() + "\n Dirección: " + medico["address"].title() + "\n Teléfono: " + medico["phone"] + "\n"
+			
+		
 	else:
         	speech =" "
 
 	return {
-        	"speech": speech,
-        	"displayText": speech,
-        	#"data": {},
-        	# "contextOut": [],
-        	"source": "apiai-onlinestore-shipping"
-    	}
+        "speech": speech,
+        "displayText": speech,
+        #"data": {},
+        # "contextOut": [],
+        "source": "apiai-onlinestore-shipping"
+    }
 
 
 if __name__ == '__main__':
 	port = int(os.getenv('PORT', 5000))
-
-    	print "Starting app on port %d" % port
-
-    	app.run(debug=True, port=port, host='0.0.0.0')
+   	print "Starting app on port %d" % port
+   	app.run(debug=True, port=port, host='0.0.0.0')
