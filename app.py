@@ -51,7 +51,7 @@ def makeWebhookResult(req):
 		ciudad = parameters.get("ciudad")
 		especialidad = parameters.get("especialidad")
 		
-		url = url = "http://lab.sura.com/api/directories/v3.1/health/network/medical/" + producto + "/" + ciudad + "/" + especialidad 
+		url = "https://api.segurossura.com.co/public/v1/directory/search/" + producto + "/" + ciudad + "?speciality=" + especialidad + "&firstname=&secondname=&firstlastname=&secondlastname="
 		myResponse = requests.get(url)
 
 		if(myResponse.ok):
