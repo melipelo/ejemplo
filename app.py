@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 import requests
-#import urllib
-import urllib.request
+import urllib2
 import json
 import os
 from flask import Flask
@@ -35,7 +34,7 @@ def makeWebhookResult(req):
         	producto = parameters.get("producto")
 		if(producto == "salud"):
 			url = "https://lab.segurossura.com.co/paginas/salud/inicio.aspx"
-			r = urllib.request.urlopen(url).read()
+			r = urllib2.urlopen(url).read()
 			soup = BeautifulSoup(r, 'html.parser')
 			contenido = soup.find_all("div",class_="col-sm-12 cp ")
 			speech = contenido[0]
