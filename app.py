@@ -34,14 +34,7 @@ def makeWebhookResult(req):
 		
 	elif req.get("result").get("action") == "producto.info":
         	producto = parameters.get("producto")
-		if(producto == "salud"):
-			url = "https://lab.segurossura.com.co/paginas/salud/inicio.aspx"
-			r = urllib2.urlopen(url).read()
-			soup = BeautifulSoup(r, 'html.parser')
-			contenido = soup.find_all("div",class_="col-sm-12 cp ")
-			speech = contenido[0]
-		else:
-        		speech = "Buscando informacion del producto " + producto
+       		speech = "Buscando informacion del producto " + producto
         
     	elif req.get("result").get("action") == "planes.salud":
         	url = "https://api.segurossura.com.co/public/v1/directory/products"
@@ -71,7 +64,17 @@ def makeWebhookResult(req):
 		for medico in jData:
 	       		speech = speech + "\n" + medico["nombreField"] + "\n Direccion: " + medico["direccionField"].title() + "\n Telefono: " + medico["telefonoField"] + "\n"
 			
-		
+	elif req.get("result").get("action") == "coberturas.producto":
+		producto = parameters.get("producto")
+		if (producto=="soat"):
+			url = "https://www.suraenlinea.com/soat/seguro-obligatorio"
+			r = urllib2.urlopen(url).read()
+			soup = BeautifulSoup(r, 'html.parser')
+			contenido = soup.find_all("div",class_="panel panel-default ng-scope")
+			speech = contenido[0]
+			
+		else:
+			speech = "Buscando coberturas del producto: " + producto
 	else:
         	speech =" "
 
