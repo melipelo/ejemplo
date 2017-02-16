@@ -32,7 +32,14 @@ def makeWebhookResult(req):
 		
 	elif req.get("result").get("action") == "producto.info":
         	producto = parameters.get("producto")
-        	speech = "Buscando informacion del producto " + producto
+		if(producto == "salud"):
+			url = "https://lab.segurossura.com.co/paginas/salud/inicio.aspx"
+			r = urllib.request.urlopen(url).read()
+			soup = BeautifulSoup(r, 'html.parser')
+			contenido = soup.find_all("div",class_="col-sm-12 cp ")
+			speech = contenido[0]
+		else:
+        		speech = "Buscando informacion del producto " + producto
         
     	elif req.get("result").get("action") == "planes.salud":
         	url = "https://api.segurossura.com.co/public/v1/directory/products"
