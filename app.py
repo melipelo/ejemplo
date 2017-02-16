@@ -38,10 +38,9 @@ def makeWebhookResult(req):
 			url = "https://www.sura.com/soluciones-personas/seguro-hogar.aspx"
 			r = urllib2.urlopen(url).read()
 			soup = BeautifulSoup(r, 'html.parser')
+			print soup
 			contenido = soup.find_all("div",class_="textRightColumn")
-			print len(contenido)
-			print (contenido)
-			#speech = contenido[0]
+			speech = contenido[0]
 			
 		else:
        			speech = "Buscando informacion del producto " + producto
