@@ -33,7 +33,8 @@ def makeWebhookResult(req):
 	elif req.get("result").get("action") == "producto.info":
         	producto = parameters.get("producto")
 		if(producto == "salud"):
-			url = "https://lab.segurossura.com.co/paginas/salud/inicio.aspx"
+			#url = "https://lab.segurossura.com.co/paginas/salud/inicio.aspx"
+			url = "https://www.python.org/"
 			r = urllib2.urlopen(url).read()
 			print r
 			soup = BeautifulSoup(r, 'html.parser')
