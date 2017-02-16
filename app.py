@@ -40,7 +40,10 @@ def makeWebhookResult(req):
 			soup = BeautifulSoup(r, 'html.parser')
 			print soup
 			contenido = soup.find_all("div",class_="textRightColumn")
-			speech = contenido[0]
+			if (len(contenido)==0):
+				speech = "No encontrado"
+			else:
+				speech = contenido[0]
 			
 		else:
        			speech = "Buscando informacion del producto " + producto
