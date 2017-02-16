@@ -35,6 +35,7 @@ def makeWebhookResult(req):
 		if(producto == "salud"):
 			url = "https://lab.segurossura.com.co/paginas/salud/inicio.aspx"
 			r = urllib2.urlopen(url).read()
+			print r
 			soup = BeautifulSoup(r, 'html.parser')
 			contenido = soup.find_all("div",class_="col-sm-12 cp ")
 			speech = contenido[0]
