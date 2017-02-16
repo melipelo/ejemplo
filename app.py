@@ -7,6 +7,8 @@ import os
 from flask import Flask
 from flask import request
 from flask import make_response
+from bs4 import BeautifulSoup 
+
 
 # Flask app should start in global layout
 app = Flask(__name__)
