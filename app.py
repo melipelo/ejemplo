@@ -65,7 +65,7 @@ def makeWebhookResult(req):
 	       		speech = speech + "\n" + medico["nombreField"] + "\n Direccion: " + medico["direccionField"].title() + "\n Telefono: " + medico["telefonoField"] + "\n"
 			
 	elif req.get("result").get("action") == "coberturas.producto":
-		producto = parameters.get("producto")
+		producto = parameters.get("productos")
 		if (producto=="soat"):
 			url = "https://www.suraenlinea.com/soat/seguro-obligatorio"
 			r = urllib2.urlopen(url).read()
