@@ -34,7 +34,15 @@ def makeWebhookResult(req):
 		
 	elif req.get("result").get("action") == "producto.info":
         	producto = parameters.get("producto")
-       		speech = "Buscando informacion del producto " + producto
+		if (producto=="hogar"):
+			url = "https://www.sura.com/soluciones-personas/seguro-hogar.aspx"
+			r = urllib2.urlopen(url).read()
+			soup = BeautifulSoup(r, 'html5lib')
+			contenido = soup.find_all("div",class_="textRightColumn")
+			speech = contenido[0]
+			
+		else:
+       			speech = "Buscando informacion del producto " + producto
         
     	elif req.get("result").get("action") == "planes.salud":
         	url = "https://api.segurossura.com.co/public/v1/directory/products"
@@ -66,15 +74,7 @@ def makeWebhookResult(req):
 			
 	elif req.get("result").get("action") == "coberturas.producto":
 		producto = parameters.get("productos")
-		if (producto=="soat"):
-			url = "https://www.suraenlinea.com/soat/seguro-obligatorio"
-			r = urllib2.urlopen(url).read()
-			soup = BeautifulSoup(r, 'html.parser')
-			contenido = soup.find_all("div",class_="panel panel-default ng-scope")
-			speech = contenido[0]
-			
-		else:
-			speech = "Buscando coberturas del producto: " + producto
+		speech = "Buscando coberturas del producto: " + producto
 	else:
         	speech =" "
 
