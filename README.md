@@ -1,5 +1,4 @@
-#How to Provide Replies about Shipping Costs via Api.ai Webhook
+#Manejo de acciones que implican consumo de un servicio en el bot de sura.com
 
-This example shows how you can use Api.ai webhook to provide different shipping costs depending on the world region.
+Esta API recibe las acciones identificadas desde el api conversacional y realiza la accion correspondiente: consultar en base de datos o llamar un servicio disponible.
 
-<a href="https://heroku.com/deploy" target="_blank"><img src="https://www.herokucdn.com/deploy/button.svg"></a>
